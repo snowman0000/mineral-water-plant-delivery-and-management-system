@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { Plus, Loader2, CalendarDays, Phone, ChevronRight } from 'lucide-react';
+import { formatDate } from '../../../shared/utils/date';
 
 const STATUS_STYLES = {
   pending: 'bg-amber-100 text-amber-700',
@@ -97,7 +98,7 @@ export default function EventsPage() {
                       <Phone className="w-3 h-3" />{ev.customer_name} · {ev.phone}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      📅 {new Date(ev.event_date).toLocaleDateString('en-IN')} · {ev.bt_qty} BT · {ev.jug_qty} JUG
+                      📅 {formatDate(ev.event_date)} · {ev.bt_qty} BT · {ev.jug_qty} JUG
                     </p>
                   </div>
                   <div className="text-right shrink-0">

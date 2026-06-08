@@ -42,6 +42,20 @@ Email:    admin@waterdelivery.com
 Password: admin123
 ```
 
+### Windows one-click startup
+If your uncle is on Windows and Node is installed, he can run the app with a single double-click:
+
+1. Open the project folder.
+2. Double-click `start-local.bat`.
+
+The script will:
+- install backend and frontend dependencies if needed
+- start the backend server on `http://localhost:5000`
+- start the frontend dev server on `http://localhost:5173`
+- open the browser automatically
+
+> Note: Node.js must be installed first. If Windows 8 cannot use the latest Node version, install Node 18 LTS or the latest compatible Node builds.
+
 ## Modules
 
 | Module | Path | Description |

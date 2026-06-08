@@ -31,7 +31,7 @@ export default function DashboardPage() {
   });
 
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const today = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <div className="p-4 lg:p-8 max-w-6xl mx-auto">

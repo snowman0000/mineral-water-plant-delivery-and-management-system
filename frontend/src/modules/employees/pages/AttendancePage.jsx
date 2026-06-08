@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { Loader2, Calendar, ClipboardCheck, UserCheck, AlertCircle, FileSpreadsheet } from 'lucide-react';
+import { formatDateWithWeekday, formatDateMonthYear } from '../../../shared/utils/date';
 
 const ATTENDANCE_STATUSES = [
   { value: 'present', label: 'Present', color: 'bg-green-100 text-green-700 border-green-200' },
@@ -411,7 +412,7 @@ export default function AttendancePage() {
           ) : (
             <div className="bg-card border border-border rounded-2xl p-5 shadow-card space-y-4">
               <div className="flex justify-between items-center pb-2 border-b border-border">
-                <span className="font-semibold text-foreground text-sm">Logs for {new Date(month + '-02').toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</span>
+                <span className="font-semibold text-foreground text-sm">Logs for {formatDateMonthYear(month + '-02')}</span>
                 <span className="text-xs text-muted-foreground">{myHistory.filter(h => h.status === 'present').length} days present</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[500px] overflow-y-auto pr-1">
@@ -421,7 +422,7 @@ export default function AttendancePage() {
                     <div key={h.id} className="flex items-center justify-between p-3 border border-border rounded-xl bg-muted/20">
                       <div>
                         <span className="text-xs text-muted-foreground font-mono block">
-                          {new Date(h.date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}
+                          {formatDateWithWeekday(h.date)}
                         </span>
                         {h.notes && <span className="text-[10px] text-muted-foreground italic mt-0.5">{h.notes}</span>}
                       </div>
@@ -472,7 +473,7 @@ export default function AttendancePage() {
               ) : employeeHistory.length === 0 ? (
                 <div className="bg-muted/30 border border-dashed border-border rounded-2xl p-8 text-center text-muted-foreground">
                   <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                  No attendance logs found for {new Date(historyMonth + '-02').toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}.
+                  No attendance logs found for {formatDateMonthYear(historyMonth + '-02')}.
                 </div>
               ) : (
                 <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
@@ -482,7 +483,7 @@ export default function AttendancePage() {
                       <div key={record.id} className="flex items-center justify-between gap-3 p-4 border border-border rounded-2xl bg-muted/20">
                         <div>
                           <p className="text-sm font-semibold text-foreground">
-                            {new Date(record.date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}
+                            {formatDateWithWeekday(record.date)}
                           </p>
                           {record.notes && <p className="text-xs text-muted-foreground mt-1">{record.notes}</p>}
                         </div>

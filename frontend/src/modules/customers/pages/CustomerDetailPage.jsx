@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { ArrowLeft, Phone, MapPin, Calendar, Edit, Pause, XCircle, FileText, Loader2, Trash2 } from 'lucide-react';
+import { formatDate } from '../../../shared/utils/date';
 
 const STATUS_COLORS = {
   active: 'bg-green-100 text-green-700',
@@ -105,7 +106,7 @@ export default function CustomerDetailPage() {
               <p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5" />{customer.mobile}</p>
               {customer.area && <p className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" />{customer.area}</p>}
               {customer.address && <p className="flex items-center gap-2 text-xs">{customer.address}</p>}
-              <p className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5" />Joined {new Date(customer.join_date).toLocaleDateString('en-IN')}</p>
+              <p className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5" />Joined {formatDate(customer.join_date)}</p>
             </div>
           </div>
           {!isDeliveryBoy && (
@@ -245,7 +246,7 @@ export default function CustomerDetailPage() {
                 <div className="flex-1">
                   <span className="font-semibold text-foreground block">{p.reason || 'Pause Window'}</span>
                   <span className="text-muted-foreground text-xs font-mono">
-                    {new Date(p.start_date).toLocaleDateString('en-IN')} – {new Date(p.end_date).toLocaleDateString('en-IN')}
+                    {formatDate(p.start_date)} – {formatDate(p.end_date)}
                   </span>
                 </div>
                 {!isDeliveryBoy && (

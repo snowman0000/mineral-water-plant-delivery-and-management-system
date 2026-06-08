@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { ArrowLeft, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { formatDate, formatDateLong } from '../../../shared/utils/date';
 
 export default function InvoiceDetailPage() {
   const { id } = useParams();
@@ -60,7 +61,7 @@ export default function InvoiceDetailPage() {
         </div>
         <div className="grid grid-cols-2 gap-3 mb-4">
           {[
-            ['Period', `${new Date(invoice.period_start).toLocaleDateString('en-IN')} – ${new Date(invoice.period_end).toLocaleDateString('en-IN')}`],
+            ['Period', `${formatDate(invoice.period_start)} – ${formatDate(invoice.period_end)}`],
             ['BT Delivered', invoice.bt_qty],
             ['JUG Delivered', invoice.jug_qty],
             ['BT Price', `₹${invoice.bt_price}`],
@@ -130,7 +131,7 @@ export default function InvoiceDetailPage() {
               <div key={p.id} className="flex items-center justify-between text-sm p-3 bg-muted/40 rounded-xl">
                 <div>
                   <p className="font-medium text-foreground">₹{Number(p.amount).toLocaleString('en-IN')}</p>
-                  <p className="text-xs text-muted-foreground capitalize">{p.payment_method} · {new Date(p.payment_date).toLocaleDateString('en-IN')}</p>
+                  <p className="text-xs text-muted-foreground capitalize">{p.payment_method} · {formatDate(p.payment_date)}</p>
                 </div>
                 <p className="text-xs text-muted-foreground">{p.recorded_by_name}</p>
               </div>
@@ -148,7 +149,7 @@ export default function InvoiceDetailPage() {
               <div key={index} className="flex items-center justify-between text-xs p-2.5 bg-muted/40 rounded-xl">
                 <div>
                   <p className="font-medium text-foreground">
-                    {new Date(d.delivery_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    {formatDateLong(d.delivery_date)}
                   </p>
                   {d.notes && <p className="text-[10px] text-muted-foreground italic mt-0.5">{d.notes}</p>}
                 </div>

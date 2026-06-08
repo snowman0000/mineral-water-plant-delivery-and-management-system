@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { Package, Loader2, Save } from 'lucide-react';
+import { formatDateWithWeekday } from '../../../shared/utils/date';
 
 export default function InventoryPage() {
   const today = new Date().toISOString().split('T')[0];
@@ -106,7 +107,7 @@ export default function InventoryPage() {
             {history.map(h => (
               <div key={h.id} className="bg-card border border-border rounded-xl p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="font-medium text-foreground text-sm">{new Date(h.log_date).toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short' })}</p>
+                  <p className="font-medium text-foreground text-sm">{formatDateWithWeekday(h.log_date)}</p>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
                   <span>Full BT: <strong className="text-foreground">{h.full_bt}</strong></span>

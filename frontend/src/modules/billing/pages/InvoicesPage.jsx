@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { apiFetch } from '../../../shared/api/client';
 import toast from 'react-hot-toast';
 import { Plus, FileText, IndianRupee, Loader2, ChevronRight } from 'lucide-react';
+import { formatDate } from '../../../shared/utils/date';
 
 const STATUS_STYLES = {
   unpaid: 'bg-red-100 text-red-700',
@@ -112,7 +113,7 @@ export default function InvoicesPage() {
                     </div>
                     <p className="text-xs text-muted-foreground">{inv.invoice_number}</p>
                     <p className="text-xs text-muted-foreground">
-                      {new Date(inv.period_start).toLocaleDateString('en-IN')} – {new Date(inv.period_end).toLocaleDateString('en-IN')}
+                      {formatDate(inv.period_start)} – {formatDate(inv.period_end)}
                     </p>
                   </div>
                   <div className="text-right shrink-0">
