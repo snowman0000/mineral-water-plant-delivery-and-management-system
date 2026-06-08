@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import ErrorBoundary from './shared/components/ErrorBoundary';
 import ProtectedRoute from './shared/components/ProtectedRoute';
 import Layout from './shared/components/Layout';
 
@@ -45,51 +46,53 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
 
-              <Route path="/customers" element={<CustomersPage />} />
-              <Route path="/customers/new" element={<CustomerFormPage />} />
-              <Route path="/customers/:id" element={<CustomerDetailPage />} />
-              <Route path="/customers/:id/edit" element={<CustomerFormPage />} />
+                <Route path="/customers" element={<CustomersPage />} />
+                <Route path="/customers/new" element={<CustomerFormPage />} />
+                <Route path="/customers/:id" element={<CustomerDetailPage />} />
+                <Route path="/customers/:id/edit" element={<CustomerFormPage />} />
 
-              <Route path="/daily-entry" element={<DailyEntryPage />} />
+                <Route path="/daily-entry" element={<DailyEntryPage />} />
 
-              <Route path="/billing" element={<InvoicesPage />} />
-              <Route path="/billing/generate" element={<GenerateBillPage />} />
-              <Route path="/billing/:id" element={<InvoiceDetailPage />} />
+                <Route path="/billing" element={<InvoicesPage />} />
+                <Route path="/billing/generate" element={<GenerateBillPage />} />
+                <Route path="/billing/:id" element={<InvoiceDetailPage />} />
 
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/events/new" element={<EventFormPage />} />
-              <Route path="/events/:id/edit" element={<EventFormPage />} />
+                <Route path="/events" element={<EventsPage />} />
+                <Route path="/events/new" element={<EventFormPage />} />
+                <Route path="/events/:id/edit" element={<EventFormPage />} />
 
-              <Route path="/inventory" element={<InventoryPage />} />
-              <Route path="/reports" element={<ReportsPage />} />
+                <Route path="/inventory" element={<InventoryPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
 
-              <Route path="/attendance" element={<AttendancePage />} />
+                <Route path="/attendance" element={<AttendancePage />} />
 
-              <Route path="/employees" element={<EmployeesPage />} />
-              <Route path="/employees/new" element={<EmployeeFormPage />} />
-              <Route path="/employees/:id/edit" element={<EmployeeFormPage />} />
+                <Route path="/employees" element={<EmployeesPage />} />
+                <Route path="/employees/new" element={<EmployeeFormPage />} />
+                <Route path="/employees/:id/edit" element={<EmployeeFormPage />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: { borderRadius: '10px', fontFamily: 'Inter, sans-serif', fontSize: '14px' },
-        }}
-      />
-    </QueryClientProvider>
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: { borderRadius: '10px', fontFamily: 'Inter, sans-serif', fontSize: '14px' },
+          }}
+        />
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
