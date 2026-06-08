@@ -43,7 +43,7 @@ export default function LoginPage() {
               <Waves className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white">AquaFlow</h1>
+              <h1 className="text-3xl font-bold text-white">Bhavani Mineral Waters</h1>
               <p className="text-white/60 text-sm">Water Delivery Manager</p>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function LoginPage() {
               <Waves className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">AquaFlow</h1>
+              <h1 className="text-2xl font-bold text-foreground">Bhavani Mineral Waters</h1>
               <p className="text-muted-foreground text-xs">Water Delivery Manager</p>
             </div>
           </div>

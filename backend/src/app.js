@@ -35,7 +35,23 @@ app.use('/api/reports',    reportRoutes);
 // ─── Health ───────────────────────────────────────────────────
 app.get('/health', (req, res) => res.json({ status: 'ok', ts: new Date() }));
 
-// ─── 404 ──────────────────────────────────────────────────────
+// ─── Serve Frontend static files ──────────────────────────────────
+const path = require('path');
+const fs = require('fs');
+const publicPath = path.join(__dirname, '../public');
+if (fs.existsSync(publicPath)) {
+  app.use(express.static(publicPath));
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(publicPath, 'index.html'));
+    }
+  });
+}
+
+// ─── 404 for API requests ─────────────────────────────────────────
+app.use('/api', (req, res) => res.status(404).json({ message: 'API Route not found' }));
+
+// ─── 404 for other requests (if frontend isn't served) ────────────
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
 // ─── Error handler ────────────────────────────────────────────

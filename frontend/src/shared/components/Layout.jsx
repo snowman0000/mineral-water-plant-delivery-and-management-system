@@ -20,6 +20,7 @@ const navItems = [
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(true);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const isDeliveryBoy = user.role === 'delivery_boy';
@@ -52,11 +53,20 @@ export default function Layout() {
     <div className={`flex flex-col h-full bg-sidebar`}>
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-sidebar-border">
-        <div className="w-9 h-9 rounded-xl bg-sidebar-primary/20 flex items-center justify-center">
-          <Waves className="w-5 h-5 text-sidebar-primary" />
+        <div className="w-9 h-9 rounded-xl bg-sidebar-primary/20 flex items-center justify-center overflow-hidden">
+          {logoLoaded ? (
+            <img
+              src="/logo.png"
+              alt="Bhavani Mineral Waters"
+              className="w-full h-full object-cover"
+              onError={() => setLogoLoaded(false)}
+            />
+          ) : (
+            <Waves className="w-5 h-5 text-sidebar-primary" />
+          )}
         </div>
         <div>
-          <h1 className="text-sidebar-foreground font-bold text-base leading-tight">AquaFlow</h1>
+          <h1 className="text-sidebar-foreground font-bold text-base leading-tight">Bhavani Mineral Waters</h1>
           <p className="text-sidebar-foreground/50 text-xs">Delivery Manager</p>
         </div>
         {mobile && (
@@ -134,7 +144,7 @@ export default function Layout() {
           </button>
           <div className="flex items-center gap-2">
             <Waves className="w-5 h-5 text-primary" />
-            <span className="font-bold text-foreground">AquaFlow</span>
+            <span className="font-bold text-foreground">Bhavani Mineral Waters</span>
           </div>
         </header>
 

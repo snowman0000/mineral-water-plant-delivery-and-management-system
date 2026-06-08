@@ -122,8 +122,6 @@ router.post('/:id/pauses', requireRole('admin', 'accountant'), async (req, res) 
       'INSERT INTO customer_pauses (customer_id, start_date, end_date, reason) VALUES (?,?,?,?)',
       [req.params.id, start_date, end_date, reason || null]
     );
-    // Also update customer status to paused
-    await pool.query("UPDATE customers SET status='paused' WHERE id=?", [req.params.id]);
     res.status(201).json({ id: result.insertId, message: 'Pause created' });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
