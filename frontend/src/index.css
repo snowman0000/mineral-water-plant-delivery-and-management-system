@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AquaFlow Design System — Ocean blue meets clean white */
+
+@layer base {
+  :root {
+    /* Core — Clean white background */
+    --background: 0 0% 98%;
+    --foreground: 215 28% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 12%;
+
+    /* Primary — Ocean blue */
+    --primary: 210 90% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary — Ice blue */
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 215 28% 20%;
+
+    /* Muted */
+    --muted: 210 25% 95%;
+    --muted-foreground: 215 15% 50%;
+
+    /* Accent — Sky */
+    --accent: 195 80% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 210 90% 48%;
+    --radius: 0.75rem;
+
+    /* Sidebar — Deep navy */
+    --sidebar-background: 215 40% 12%;
+    --sidebar-foreground: 210 30% 92%;
+    --sidebar-primary: 210 90% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 35% 20%;
+    --sidebar-accent-foreground: 210 30% 92%;
+    --sidebar-border: 215 30% 20%;
+    --sidebar-ring: 210 90% 62%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 90% 48%) 0%, hsl(195 80% 42%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 25% 98%) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 1px 3px 0 hsl(215 28% 12% / 0.04), 0 1px 2px -1px hsl(215 28% 12% / 0.04);
+    --shadow-elevated: 0 20px 25px -5px hsl(215 28% 12% / 0.08), 0 8px 10px -6px hsl(215 28% 12% / 0.06);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body, #root { height: 100%; margin: 0; padding: 0; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4 { @apply font-display font-semibold tracking-tight; }
+}
+
+@layer utilities {
+  .gradient-hero { background: var(--gradient-hero); }
+  .gradient-card { background: var(--gradient-card); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+  .font-display { font-family: 'Inter', system-ui, sans-serif; }
+
+  .animate-slide-up {
+    animation: slideUp 0.35s ease-out;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }
+
+  /* Touch tap highlight removal */
+  * { -webkit-tap-highlight-color: transparent; }
+}
