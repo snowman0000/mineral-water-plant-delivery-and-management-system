@@ -19,7 +19,20 @@ const reportRoutes = require('./modules/reports/reports.routes');
 const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
-app.use(helmet());
+app.use(helmet({
+  // Disable upgrade-insecure-requests for HTTP deployments
+  strictTransportSecurity: 'production' === process.env.NODE_ENV,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+      imgSrc: ["'self'", "data:"],
+      // Remove upgrade-insecure-requests for HTTP environments
+      upgradeInsecureRequests: 'production' === process.env.NODE_ENV ? [] : null,
+    },
+  },
+}));
 app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 app.use(morgan('dev'));
